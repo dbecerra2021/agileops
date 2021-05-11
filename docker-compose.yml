@@ -1,0 +1,25 @@
+version: '3.2'
+services:
+  mysql:
+      build: ./bd
+      tty: true
+      environment:
+        MYSQL_ROOT_PASSWORD: password
+  backend:
+      build: ./src
+      tty: true
+      links:
+        - mysql
+      depends_on:
+        - mysql
+  reverseproxy:
+      build: ./proxy
+      tty: true
+      links:
+        - backend
+      ports:
+        - '8080:8080'
+      depends_on:
+        - backend
+volumes:
+  backend:
