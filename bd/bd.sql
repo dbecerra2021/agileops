@@ -2,14 +2,12 @@ CREATE DATABASE /*!32312 IF NOT EXISTS*/`agileops` /*!40100 DEFAULT CHARACTER SE
 
 USE `agileops`;
 
+DROP TABLE IF EXISTS `suma`;
 
-
-DROP TABLE IF EXISTS `addition`;
-
-CREATE TABLE `addition` (
-  `add1` DECIMAL(10,2),
-  `add2` DECIMAL(10,2),
-  `result` DECIMAL(10,2)
+CREATE TABLE `suma` (
+  `sumando1` DECIMAL(10,2),
+  `sumando2` DECIMAL(10,2),
+  `resultado` DECIMAL(10,2)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8;
 
 

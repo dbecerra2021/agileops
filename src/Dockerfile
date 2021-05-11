@@ -1,8 +1,5 @@
 FROM php:7.2-fpm
 
-# Copy composer.lock and composer.json
-# COPY composer.lock composer.json /var/www/
-
 # Set working directory
 WORKDIR /var/www
 
@@ -29,7 +26,7 @@ RUN docker-php-ext-configure gd --with-gd --with-freetype-dir=/usr/include/ --wi
 RUN docker-php-ext-install gd
 
 # Install composer
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
+#RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
 
 # Add user for laravel application
 RUN groupadd -g 1000 www
@@ -41,6 +38,7 @@ COPY . /var/www
 # Copy existing application directory permissions
 COPY --chown=www:www . /var/www
 
+# Install composer
 RUN curl -s https://getcomposer.org/installer > instalador.php
 RUN php instalador.php
 RUN php composer.phar require slim/slim:~2.0
@@ -51,7 +49,5 @@ EXPOSE 9000
 # Change current user to www
 USER www
 
-
-#CMD ["php-fpm"]
 CMD ["php","-S","0.0.0.0:9000"]
 
